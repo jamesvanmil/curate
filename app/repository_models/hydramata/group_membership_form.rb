@@ -63,7 +63,7 @@ class Hydramata::GroupMembershipForm
   # The Group object is maintaining stale value for some reason.
   # The object has to be reloaded everytime to get the consistent result.
   # I dont like this either. Hope this will get refactored when curate goes through refactoring.
-  # Scenario where I found this: 
+  # Scenario where I found this:
   # When a member is removed from the group and immediately added back in the same update, then
   # the member is removed but not added back (even though it was added back).
   def persist

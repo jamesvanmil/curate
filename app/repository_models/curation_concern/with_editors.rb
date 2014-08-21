@@ -16,7 +16,7 @@ module CurationConcern
       group.save!
     end
 
-    # @param groups [Array<Hydramata::Group>] a list of groups to add 
+    # @param groups [Array<Hydramata::Group>] a list of groups to add
     def add_editor_groups(groups)
       groups.each do |g|
         add_editor_group(g)

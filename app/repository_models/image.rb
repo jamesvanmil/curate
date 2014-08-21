@@ -41,20 +41,16 @@ class Image < ActiveFedora::Base
       label: "Description",
       multiple: true
 
-    ds.attribute :category,
-      label: 'Category',
+    ds.attribute :alternate_title,
+      label: "Alternate Title",
       multiple: true
 
-    ds.attribute :location,
-      label: "The geographic location and/or name of the repository, building, site, or other entity whose boundaries include the Work or Image",
+    ds.attribute :contributor,
+      label: "Contributor",
       multiple: true
 
-    ds.attribute :measurements,
-      label: "The physical size, shape, scale, dimensions, or format of the work or image. Dimensions may include such measurements as volume, weight, area or running time.",
-      multiple: true
-
-    ds.attribute :material,
-      label: 'Material',
+    ds.attribute :contributor_institution,
+      label: "Contributor Institution",
       multiple: true
 
     ds.attribute :source,
@@ -65,32 +61,48 @@ class Image < ActiveFedora::Base
       label: 'publisher',
       multiple: true
 
+    ds.attribute :date_digitized,
+      label: 'Date Digitized',
+      multiple: true
+
+    ds.attribute :recommended_citation,
+      label: 'Recommended Citation',
+      multiple: true
+
+    ds.attribute :repository_name,
+      label: 'Repository Name',
+      multiple: true
+
+    ds.attribute :collection_name,
+      label: 'Collection Name',
+      multiple: true
+
+    ds.attribute :temporal_coverage,
+      label: 'Temporal Coverage',
+      multiple: true
+
+    ds.attribute :spatial_coverage,
+      label: 'Spatial Coverage',
+      multiple: true
+
+    ds.attribute :digitizing_equipment,
+      label: 'Digitizing Equipment',
+      multiple: true
+
+    ds.attribute :language,
+      label: 'Language',
+      multiple: true
+
+    ds.attribute :size,
+      label: 'Size',
+      multiple: true
+
+    ds.attribute :requires,
+      label: 'Requires',
+      multiple: true
+
     ds.attribute :subject,
       label: 'Subject Keywords',
-      multiple: true
-
-    ds.attribute :inscription,
-      label: 'Inscription',
-      multiple: true
-
-    ds.attribute :StateEdition,
-      label: 'State Edition',
-      multiple: false
-
-    ds.attribute :textref,
-      label: 'Textref',
-      multiple: true
-
-    ds.attribute :cultural_context,
-      label: 'Cultural context',
-      multiple: true
-
-    ds.attribute :style_period,
-      label: 'Style Period',
-      multiple: true
-
-    ds.attribute :technique,
-      label: 'Technique',
       multiple: true
 
     ds.attribute :date_uploaded,

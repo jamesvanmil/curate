@@ -7,6 +7,7 @@ describe GenericWork do
   it_behaves_like 'is_embargoable'
   it_behaves_like 'has_dc_metadata'
   it_behaves_like 'has_common_solr_fields'
+  # it_behaves_like 'remotely_identified', :doi
 
   it { should have_unique_field(:available) }
   it { should have_unique_field(:human_readable_type) }
@@ -14,6 +15,17 @@ describe GenericWork do
   context '#rights' do
     it 'has a default value' do
       GenericWork.new.rights.should == 'All rights reserved'
+    end
+  end
+
+  context 'solrize doi' do
+    let!(:work) { FactoryGirl.create(:generic_work, title: 'Work') }
+    it 'should solrize doi' do
+      work.to_solr.keys.should_not include('desc_metadata__identifier_tesim')
+      work.identifier = 'doi:10.5072/FK2'
+      work.save!
+    
+      work.to_solr.keys.should include('desc_metadata__identifier_tesim')
     end
   end
 

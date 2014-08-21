@@ -58,12 +58,12 @@ module Curate::CollectionsHelper
       list1.concat(list2).html_safe
     end
   end
-  
+
   def list_collections_in_profile(collection, member, options)
     if can? :read, member
       content_tag :li, class: line_item_class(collection), data: { noid: member.noid }do
         markup = work_line_item(member, options)
-        if can? :edit, member 
+        if can? :edit, member
           markup << collection_member_actions(collection, member)
         end
         markup

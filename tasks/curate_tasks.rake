@@ -48,11 +48,12 @@ task :generate do
       gem 'capybara'
       gem 'coveralls', require: false
       gem 'database_cleaner', '< 1.1.0'
-      gem 'factory_girl_rails', '~> 4.2.0'
-      gem 'rspec', '~> 2.14.0'
+      gem 'factory_girl_rails'
       gem 'launchy'
       gem 'poltergeist'
-      gem 'rspec-html-matchers', '~> 0.4.0'
+      gem 'rspec-html-matchers'
+      gem 'rspec-its'
+      gem 'rspec-activemodel-mocks'
       gem 'simplecov', require: false
       gem 'test_after_commit'
       gem 'timecop'

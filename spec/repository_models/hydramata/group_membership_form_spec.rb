@@ -107,7 +107,7 @@ describe Hydramata::GroupMembershipForm do
 
     it 'should have atleast one editor' do
       @gmf = Hydramata::GroupMembershipForm.new(params_4)
-      @gmf.save.should == false 
+      @gmf.save.should == false
     end
 
     it 'should add back member which was deleted in the same update' do

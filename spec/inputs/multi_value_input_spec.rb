@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'MultiValueInput' do
+describe 'MultiValueInput', type: :input do
 
   class Foo
     extend ActiveModel::Naming
@@ -49,7 +49,6 @@ describe 'MultiValueInput' do
       foo.bar = bar
       input_for(foo, :bar, { as: :multi_value, required: true } )
     end
-
 
     it 'renders multi-value given a nil object' do
       expect(subject).to have_tag('.control-group.foo_bar.multi_value') do

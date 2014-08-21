@@ -1,4 +1,4 @@
-# Curate  [![Version](https://badge.fury.io/rb/curate.png)](http://badge.fury.io/rb/curate) [![Build Status](https://travis-ci.org/projecthydra-labs/curate.png?branch=master)](https://travis-ci.org/projecthydra-labs/curate) [![Coverage Status](https://coveralls.io/repos/projecthydra/curate/badge.png)](https://coveralls.io/r/projecthydra/curate)
+# Curate  [![Version](https://badge.fury.io/rb/curate.png)](http://badge.fury.io/rb/curate) [![Build Status](https://travis-ci.org/ndlib/curate.png?branch=master)](https://travis-ci.org/ndlib/curate) [![Coverage Status](https://coveralls.io/repos/ndlib/curate/badge.png)](https://coveralls.io/r/ndlib/curate)
 
 Curate is a [Rails engine](http://edgeguides.rubyonrails.org/engines.html) leveraging [ProjectHydra](http://projecthydra.org) and [ProjectBlacklight](http://projectblacklight.org/) components to deliver a foundation for an Institutional Repositories.
 It is released under the [Apache 2 License](./LICENSE)
@@ -22,7 +22,7 @@ It is released under the [Apache 2 License](./LICENSE)
 
 When you generate your new Rails application, you can use Curate's application template:
 ```bash
-$ rails new my_curate_application -m https://raw.github.com/projecthydra-labs/curate/develop/lib/generators/curate/application_template.rb
+$ rails new my_curate_application -m https://raw.github.com/projecthydra/curate/master/lib/generators/curate/application_template.rb
 ```
 
 ## Or Install By Hand
@@ -143,7 +143,3 @@ For integration with LDAP, refer: https://github.com/cschiewek/devise_ldap_authe
 For integration with Shibboleth, refer: https://github.com/jgeorge300/devise_shibboleth_authenticatable
 
 For integration with multiple authentication systems (and for twitter, facebook, etc.), consider using OmniAuth: https://github.com/intridea/omniauth
-
-# Standing up your Curate-based Rails application in Production
-
-We are working on this and have more to come.

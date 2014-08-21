@@ -143,10 +143,19 @@ class CatalogController < ApplicationController
     # since we aren't specifying it otherwise.
     config.add_search_field('all_fields', label: 'All Fields', :include_in_advanced_search => false) do |field|
       title_name = solr_name("desc_metadata__title", :stored_searchable, type: :string)
-      label_name = solr_name("desc_metadata__title", :stored_searchable, type: :string)
+      label_name = solr_name("desc_metadata__name", :stored_searchable, type: :string)
       contributor_name = solr_name("desc_metadata__contributor", :stored_searchable, type: :string)
+      description_name = solr_name("desc_metadata__description", :stored_searchable, type: :string)
+      abstract_name = solr_name("desc_metadata__abstract", :stored_searchable, type: :string)
+      creator_name = solr_name("desc_metadata__creator", :stored_searchable)
+      publisher_name = solr_name("desc_metadata__publisher", :stored_searchable, type: :string)
+      language_name = solr_name("desc_metadata__language", :stored_searchable, type: :string)
+      collection_name = solr_name("desc_metadata__collection_name", :stored_searchable, type: :string)
+      contributor_institution_name = solr_name("desc_metadata__contributor_institution", :stored_searchable, type: :string)
+      subject_name = solr_name("desc_metadata__subject", :stored_searchable, type: :string)
+      identifier_name = solr_name("desc_metadata__identifier", :stored_searchable, type: :string)
       field.solr_parameters = {
-        :qf => "#{title_name} noid_tsi #{label_name} file_format_tesim #{contributor_name}",
+        :qf => "#{title_name} #{label_name} noid_tsi file_format_tesim #{contributor_name} #{abstract_name} #{description_name} #{creator_name} #{publisher_name} #{language_name} #{collection_name} #{contributor_institution_name} #{subject_name} #{identifier_name}",
         :pf => "#{title_name}"
       }
     end
@@ -195,11 +204,23 @@ class CatalogController < ApplicationController
     end
 
     config.add_search_field('description') do |field|
-      field.label = "Abstract or Summary"
+      field.label = "Description or Summary"
       field.solr_parameters = {
         :"spellcheck.dictionary" => "description"
       }
       solr_name = solr_name("desc_metadata__description", :stored_searchable, type: :string)
+      field.solr_local_parameters = {
+        :qf => solr_name,
+        :pf => solr_name
+      }
+    end
+
+    config.add_search_field('abstract') do |field|
+      field.label = "Abstract or Summary"
+      field.solr_parameters = {
+        :"spellcheck.dictionary" => "abstract"
+      }
+      solr_name = solr_name("desc_metadata__abstract", :stored_searchable, type: :string)
       field.solr_local_parameters = {
         :qf => solr_name,
         :pf => solr_name

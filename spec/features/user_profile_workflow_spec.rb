@@ -34,7 +34,7 @@ describe 'user profile workflow', FeatureSupport.options do
         click_button("Update")
       end
 
-      msg = 'Your account has been updated successfully'
+      msg = 'You updated your account successfully'
       expect(page).to have_content msg
 
       # Reload models
@@ -107,7 +107,7 @@ describe 'user profile workflow', FeatureSupport.options do
     within("form.new_user") do
       fill_in("user[email]", with: email)
       fill_in("user[password]", with: password)
-      click_button("Log in")
+      click_button("Sign in")
     end
 
     page.assert_selector(".alert", "Invalid email or password", count: 1)
@@ -133,7 +133,7 @@ describe 'user profile workflow', FeatureSupport.options do
     within("form.new_user") do
       fill_in("user[email]", with: email)
       fill_in("user[password]", with: password)
-      click_button("Log in")
+      click_button("Sign in")
     end
     click_link("add-content")
     assert_on_page_allowing_upload!
@@ -144,8 +144,7 @@ describe 'user profile workflow', FeatureSupport.options do
   end
 
   def assert_logout_link_is_visible
-    # Because the link is hidden in a drop-down
-    page.assert_selector("#site-actions .log-out", text: "Log Out", count: 1, visible: false)
+    page.should have_selector("#site-actions .log-out")
   end
 
   def assert_user_has_not_updated_their_profile_yet(user_email)

@@ -21,7 +21,7 @@ describe Person do
   describe 'Collection' do
     it 'should not add a person object to the collection' do
       person = Person.new
-      expect(person.can_be_member_of_collection?(double)).to be_falsey
+      expect(person.can_be_member_of_collection?(double)).to be_false
     end
   end
 
@@ -84,7 +84,7 @@ describe Person do
       solr_doc['human_readable_type_sim'].should == 'Person'
     end
     it "is_user_ssi should be false" do
-      solr_doc['has_user_bsi'].should be_falsey
+      solr_doc['has_user_bsi'].should be_false
     end
 
     describe "when the person has an associated user account" do
@@ -93,7 +93,7 @@ describe Person do
         FactoryGirl.create(:user, repository_id: subject.pid)
       end
       it "is_user_ssi should be true" do
-        solr_doc['has_user_bsi'].should be_truthy
+        solr_doc['has_user_bsi'].should be_true
       end
     end
   end

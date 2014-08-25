@@ -2,7 +2,6 @@ class Etd < ActiveFedora::Base
   include CurationConcern::Work
   include CurationConcern::WithGenericFiles
   include CurationConcern::WithLinkedResources
-  include CurationConcern::WithLinkedContributors
   include CurationConcern::WithRelatedWorks
   include CurationConcern::Embargoable
   include CurationConcern::WithEditors
@@ -22,21 +21,34 @@ class Etd < ActiveFedora::Base
     'ETD'
   end
 
-  has_attributes :degree, datastream: :descMetadata, multiple: true
+  has_attributes :degree, :degree_attributes, datastream: :descMetadata, multiple: true
+  has_attributes :contributor, :contributor_attributes, datastream: :descMetadata, multiple: true
 
-  self.indefinite_article = 'an'
-  self.contributor_label = 'Author'
+  def build_degree
+    descMetadata.degree = [EtdMetadata::Degree.new(RDF::Repository.new)]
+  end
+
+  def build_contributor
+    descMetadata.contributor = [EtdMetadata::Contributor.new(RDF::Repository.new)]
+  end
+
+  def self.valid_degree_levels
+    EtdVocabulary.values_for("degree_level")
+  end
+
+  def self.valid_degree_names
+    EtdVocabulary.values_for("degree_name")
+  end
+
+  def self.valid_degree_disciplines
+    EtdVocabulary.values_for("degree_discipline")
+  end
 
   with_options datastream: :descMetadata do |ds|
-    ds.attribute :contributor,
+    ds.attribute :creator,
       multiple: true,
-      label: "Contributor(s)",
-      hint: "Who else played a non-primary role in the creation of your #{etd_label}.",
-      validates: { multi_value_presence: { message: "Your #{human_readable_type.downcase} must have #{label_with_indefinite_article}." } }
-    ds.attribute :contributor_role,
-      multiple: true,
-      label: "Contributor role(s)",
-      hint: "The nature of the person or entity's contribution to the #{etd_label}. Examples: co-author, committee member, chair, co-chair, referee, juror."
+      label: "Author(s)",
+      validates: { presence: { message: "Your #{etd_label} must have an Author." } }
     ds.attribute :title,
       label: 'Title',
       hint: "Title of the work as it appears on the title page or equivalent",
@@ -74,27 +86,16 @@ class Etd < ActiveFedora::Base
       multiple: false
     ds.attribute :date_modified, 
       multiple: false
-    # ds.attribute :degree,
-    #   label: "Degree name",
-    #   hint: "Name of the degree associated with the work as it appears within the work. Example: Masters in Operations Research",
-    #   multiple: false,
-    #   validates: { presence: { message: "Your #{etd_label} must have a degree." } }
-    # ds.attribute :degree_level,
-    #   label: "Degree level",
-    #   multiple: false,
-    #   validates: { presence: { message: "Your #{etd_label} must have a degree level." } }
-    #   #In ETD-MS, three levels are valid: 0 Undergraduate (pre-masters) 1 Masters (pre-doctoral) 2 Doctoral (includes post-doctoral)
-    # ds.attribute :department,
-    #   label: "Department or Program",
-    #   multiple: false,
-    #   hint: "Name of the department or program with which the author is affiliated."
-    # ds.attribute :institution,
-    #   multiple: false,
-    #   hint: "Institution granting the degree associated with the work."
+    ds.attribute :subject,
+      label: "Keyword(s) or phrase(s)",
+      hint: "What words or phrases would be helpful for someone searching for your ETD",
+      datastream: :descMetadata, multiple: true,
+      validates: { presence: { message: "Your #{etd_label} must have a keyword." } }
     ds.attribute :language,
       hint: "What is the language(s) in which you wrote your #{etd_label}?",
       default: ['English'],
-      multiple: true
+      multiple: true,
+      validates: { presence: { message: "Your #{etd_label} must have a language." } }
     ds.attribute :rights,
       default: "All rights reserved",
       multiple: false,
@@ -123,9 +124,21 @@ class Etd < ActiveFedora::Base
     ds.attribute :doi,
       multiple: false,
       editable: false
+    ds.attribute :urn,
+      multiple: false,
+      editable: false
+    ds.attribute :date,
+      default: Date.today.to_s("%Y-%m-%d"),
+      multiple: false,
+      label: "Defense Date",
+      validates: { presence: { message: "Your #{etd_label} must have a defense date." } }
+    ds.attribute :date_approved,
+      multiple: false,
+      label: "Approval Date"
   end
 
   attribute :files,
     multiple: true, form: {as: :file}, label: "Upload Files",
     hint: "CTRL-Click (Windows) or CMD-Click (Mac) to select multiple files."
+
 end

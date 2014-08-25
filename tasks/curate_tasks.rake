@@ -52,8 +52,6 @@ task :generate do
       gem 'launchy'
       gem 'poltergeist'
       gem 'rspec-html-matchers'
-      gem 'rspec-its'
-      gem 'rspec-activemodel-mocks'
       gem 'simplecov', require: false
       gem 'test_after_commit'
       gem 'timecop'

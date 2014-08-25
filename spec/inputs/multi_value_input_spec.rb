@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'MultiValueInput', type: :input do
+describe 'MultiValueInput' do
 
   class Foo
     extend ActiveModel::Naming

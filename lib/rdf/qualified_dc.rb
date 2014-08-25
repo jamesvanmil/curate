@@ -11,6 +11,7 @@ module RDF
     property "publisher#country".to_sym
     property "identifier#doi".to_sym
     property "identifier#issn".to_sym
+    property "identifier#other".to_sym
     property "contributor#repository".to_sym
     property "contributor#institution".to_sym
     property "relation#ispartof".to_sym
@@ -29,5 +30,6 @@ module RDF
     property "date#digitized".to_sym
     property "coverage#spatial".to_sym
     property "coverage#temporal".to_sym
+    property "date#approved".to_sym
   end
 end

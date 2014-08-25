@@ -34,7 +34,7 @@ describe CurationConcern::LinkedResourceActor do
           return_value = subject.create
         }.to_not change { LinkedResource.count }
         reload_resource(parent).linked_resources.should == []
-        return_value.should be_falsey
+        return_value.should be_false
       end
     end
   end
